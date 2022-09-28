@@ -1,5 +1,7 @@
 import math
 
+# dijkstra algorithm
+
 def dijkstra(gr, start, end):
 
     answer = {}
@@ -38,26 +40,27 @@ def dijkstra(gr, start, end):
 
 def main():
     
-    #beolvasás
+    # beolvasás
 
     graph = {}
     paths = []
     nodes = {}
 
-    path = int(input())
+    p = int(input())
     n = int(input())
-    edges = int(input())
+    e = int(input())
 
-    # melyik csúcsok között megy él
+    # save the [start node, destination node] pairs in a list
 
     input().strip("\n")
     
-    for i in range(path):
+    for i in range(p):
         u = input()
         u = u.split()
         paths.append([int(u[0]), int(u[1])])
 
-    # csúcsok koordinátái
+    # save the coordinates of the nodes in a dicrionary
+    # the key of each node is the ID of it
 
     input().strip("\n")
     
@@ -66,11 +69,15 @@ def main():
         u = u.split()
         nodes[i] = [int(u[0]), int(u[1])]
 
-    # élek
+    
+    # make a graph dictionary while saving the ID's of the links
+
+    # Each key is the ID of the node (0,1,2...) and each value is a 2d array with the values of
+    #[ node ID, distance from the node ] but only if it's linked with the key node
     
     input().strip("\n")
 
-    for i in range(edges):
+    for i in range(e):
         u = input()
         u = u.split()
         u = [int(u[0]), int(u[1])]
@@ -83,12 +90,12 @@ def main():
         graph[u[0]].append([u[1], round(dist, 2)])
         graph[u[1]].append([u[0], round(dist, 2)])
 
-    #print(paths)
-    #print(nodes)
-    #print(graph)
+    # print(graph)
 
     answers = []
 
+    # run the dijkstra algorithm function for every [start-destination node] pairs
+    
     for i in paths:
         answers.append(dijkstra(graph, i[0], i[1]))
         
